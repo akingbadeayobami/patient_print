@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+	<title>Patient Print</title>
+
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+	<nav class="light-blue lighten-1" role="navigation">
+		<div class="nav-wrapper container">
+			<a id="logo-container" href="#" class="brand-logo">Patient Print</a>
+		</div>
+	</nav>
+	<div class="section no-pad-bot" id="index-banner">
+		<div class="container">
+			<br>
+			<br>
+			<h1 class="header center orange-text">Get Your Patient Print</h1>
+			<div class="row center">
+				<h5 class="header col s12 light">Generate a unique Identifier for your patient</h5>
+			</div>
+			<div class="row center">
+
+				<form>
+					<div class="row">
+
+						<div class="input-field col s6">
+							<input placeholder="First Name" id="first_name" type="text" class="validate" required>
+							<label for="first_name">First Name</label>
+						</div>
+						<div class="input-field col s6">
+							<input placeholder="Maiden Name / Surname" id="last_name" type="text" class="validate" required>
+							<label for="last_name">Maiden Name / Surname</label>
+						</div>
+					</div>
+
+					<div class="input-field col s12 m6">
+						<select id="blood_group" required>
+							<option value="">Choose your option</option>
+							<option value="1">O</option>
+							<option value="2">A</option>
+							<option value="3">B</option>
+              <option value="4">AB</option>
+						</select>
+						<label for="blood_group">Blood Group</label>
+          </div>
+ 
+					<div class="input-field col s12 m6">
+						<select id="geno_type" required>
+							<option value="">Choose your option</option>
+							<option value="1">AA</option>
+							<option value="2">AS</option>
+							<option value="3">SS</option>
+						</select>
+						<label for="geno_type">Genotype</label>
+					</div>
+
+					<div class="input-field col s6">
+						<input placeholder="Placeholder" id="country" type="text" class="validate" required>
+						<label for="country">Country</label>
+          </div>
+          
+					<div class="input-field col s6">
+						<input id="state" type="text" class="validate" required>
+						<label for="state">State of Origin</label>
+					</div>
+
+					<div class="input-field col s12">
+						<input id="dob" type="date" class="validate" required>
+						<label for="dob">Date of Birth</label>
+					</div>
+
+				</form>
+			</div>
+
+			<a href="javascript:void(0);" id="get_patient_print" class="btn-large waves-effect waves-light orange">Get PatientPrint</a>
+		</div>
+	</div>
+	</div>
+
+	<div class="container">
+		<div class="section">
+
+			<!--   Icon Section   -->
+			<div class="row">
+				<div class="col s12 m4">
+					<div class="icon-block">
+						<h2 class="center light-blue-text">
+							<i class="material-icons">flash_on</i>
+						</h2>
+						<h5 class="center">Fast</h5>
+
+						<p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally,
+							we refined animations and transitions to provide a smoother experience for developers.</p>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="icon-block">
+						<h2 class="center light-blue-text">
+							<i class="material-icons">group</i>
+						</h2>
+						<h5 class="center">Local</h5>
+
+						<p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components
+							and animations that provide more feedback to users. Additionally, a single underlying responsive system across all
+							platforms allow for a more unified user experience.</p>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="icon-block">
+						<h2 class="center light-blue-text">
+							<i class="material-icons">settings</i>
+						</h2>
+						<h5 class="center">Easy to work with</h5>
+
+						<p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also
+							always open to feedback and can answer any questions a user may have about Materialize.</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<br>
+		<br>
+	</div>
+
+	<footer class="page-footer orange">
+		<div class="footer-copyright">
+			<div class="container">
+				Made by
+				<a class="orange-text text-lighten-3" href="http://materializecss.com">Black Bullet Holes</a>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Modal Structure -->
+	<div id="modal1" class="modal">
+		<div class="modal-content center">
+			<h5>Your Patient Print Is</h5>
+			<br />
+			<br />
+			<br />
+			<h3 id="patient_print"></h3>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+		</div>
+	</div>
+	<!--  Scripts-->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+	<script src="./patientprint.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('select').formSelect();
+			$('.modal').modal();
+
+			$('#get_patient_print').click(function () {
+				var patientObject = {};
+				['first_name', 'last_name', 'blood_group', 'geno_type', 'country', 'state', 'dob'].forEach(detail => {
+					patientObject[detail] = $('#' + detail).val();
+				});
+				$('#patient_print').text(getPatientPrint(patientObject));
+				var instance = M.Modal.getInstance(document.querySelector('#modal1'));
+				instance.open();
+			});
+		});
+
+	</script>
+</body>
+
+</html>
